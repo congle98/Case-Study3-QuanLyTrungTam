@@ -29,7 +29,7 @@ public class StatusService implements IStatusService{
     Connection connection = ConnectionJDBC.getConnection();
 
     @Override
-    public List<Status> findAll()  {
+    public List<Status> findAll(){
         List <Status> listStatus = new ArrayList<>();
         PreparedStatement statement = null;
         try {
@@ -39,10 +39,6 @@ public class StatusService implements IStatusService{
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 listStatus.add(new Status(id,name));
-                for (Status s: listStatus
-                ) {
-                    System.out.println(s);
-                }
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -51,11 +47,12 @@ public class StatusService implements IStatusService{
     }
 
     @Override
-    public Status findById(int id)  {
+    public Status findById(int id){
         Status status = null;
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(SELECT_STT_BY_ID);
+            statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 String name = resultSet.getString("name");
@@ -68,7 +65,7 @@ public class StatusService implements IStatusService{
     }
 
     @Override
-    public void save(Status status)  {
+    public void save(Status status){
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(SAVE_STT);
@@ -77,11 +74,10 @@ public class StatusService implements IStatusService{
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     @Override
-    public void delete(int id)  {
+    public void delete(int id){
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(DELETE_STT_BY_ID);
@@ -94,7 +90,7 @@ public class StatusService implements IStatusService{
     }
 
     @Override
-    public void edit(int id, Status status)  {
+    public void edit(int id, Status status){
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(UPDATE_STT);

@@ -18,7 +18,20 @@
     <title>Hello, world!</title>
 </head>
 <body>
+<%--<c:forEach items="${listSTT}" var="stt">--%>
+<%--    <table border="1">--%>
+<%--        <tr>--%>
+<%--            <td>${stt.name}</td>--%>
+<%--            <td>${stt.course.name}</td>--%>
+<%--        </tr>--%>
+<%--    </table>--%>
+<%--</c:forEach>--%>
 
+        <h1>${stt.name}</h1>
+        <h1>${stt.course.name}</h1>
+
+
+<%--<h1>${listSTT.name}</h1>--%>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
