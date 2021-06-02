@@ -12,7 +12,11 @@ public class Class {
         this.teacher = teacher;
         this.course = course;
     }
-
+    public Class (int id, String name, Course course){
+        this.id = id;
+        this.name = name;
+        this.course = course;
+    }
     public Class(String name, Teacher teacher, Course course) {
         this.name = name;
         this.teacher = teacher;

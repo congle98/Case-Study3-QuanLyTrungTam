@@ -18,13 +18,18 @@
     <title>Hello, world!</title>
 </head>
 <body>
-<c:forEach items="${listSTT}" var="stt">
-    <table>
-        <tr>
-            <td>${stt.name}</td>
-        </tr>
-    </table>
-</c:forEach>
+<%--<c:forEach items="${listSTT}" var="stt">--%>
+<%--    <table border="1">--%>
+<%--        <tr>--%>
+<%--            <td>${stt.name}</td>--%>
+<%--            <td>${stt.course.name}</td>--%>
+<%--        </tr>--%>
+<%--    </table>--%>
+<%--</c:forEach>--%>
+
+        <h1>${stt.name}</h1>
+        <h1>${stt.course.name}</h1>
+
 
 <%--<h1>${listSTT.name}</h1>--%>
 </body>

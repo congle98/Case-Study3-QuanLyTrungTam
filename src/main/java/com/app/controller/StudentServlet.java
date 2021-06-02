@@ -1,6 +1,8 @@
 package com.app.controller;
 
 import com.app.models.Course;
+import com.app.service.classService.ClassService;
+import com.app.service.classService.IClassService;
 import com.app.service.courseService.CourseService;
 import com.app.service.courseService.ICourseService;
 
@@ -12,11 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 
 @WebServlet(name = "StudentServlet", value = "/student")
 public class StudentServlet extends HttpServlet {
-   ICourseService courseService = new CourseService();
+   IClassService classService = new ClassService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -33,9 +36,8 @@ public class StudentServlet extends HttpServlet {
     }
 
     private void showAllStataus(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("student/studentList.jsp");
-        courseService.edit(5,new Course("check", 10));
-        req.setAttribute("listSTT", courseService.findAll());
+        RequestDispatcher dispatcher = req.getRequestDispatcher("check.jsp");
+        req.setAttribute("listSTT", classService.findById(1));
         dispatcher.forward(req,resp);
     }
 

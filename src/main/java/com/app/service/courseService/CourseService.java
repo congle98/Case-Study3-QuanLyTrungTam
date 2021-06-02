@@ -58,7 +58,7 @@ public class CourseService implements ICourseService{
             while (resultSet.next()){
                 String name = resultSet.getString("name");
                 double price = resultSet.getDouble("price");
-                course = new Course(name,price);
+                course = new Course(id,name,price);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
