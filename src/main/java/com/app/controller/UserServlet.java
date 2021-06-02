@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/trang-chu")
@@ -59,24 +60,30 @@ public class UserServlet extends HttpServlet {
     private void supervisorLogin(HttpServletRequest req, HttpServletResponse resp) {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        List<Supervisor> supervisorList = supervisorService.findAll();
-        System.out.println(supervisorList);
-        boolean check = false;
-        for (Supervisor s: supervisorList
-             ) {
-            if(s.getEmail().equals(email)&& s.getPassword().equals(password)) {
-                check = true;
+        List<Supervisor> supervisorList = null;
+        try {
+            supervisorList = supervisorService.findAll();
+            System.out.println(supervisorList);
+            boolean check = false;
+            for (Supervisor s: supervisorList
+            ) {
+                if(s.getEmail().equals(email)&& s.getPassword().equals(password)) {
+                    check = true;
 
-                try {
-                    resp.sendRedirect("/supervisor/supervisorHome.jsp");
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    try {
+                        resp.sendRedirect("/supervisor/supervisorHome.jsp");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+            if (!check){
+                comeBackIndex(req,resp);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        if (!check){
-            comeBackIndex(req,resp);
-        }
+
     }
 
     private void comeBackIndex(HttpServletRequest req, HttpServletResponse resp){
