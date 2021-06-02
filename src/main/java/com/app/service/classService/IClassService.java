@@ -1,9 +1,7 @@
-package com.app.service.ClassService;
+package com.app.service.classService;
 
 import com.app.models.Class;
 import com.app.service.IService;
-
-import java.util.List;
 
 public interface IClassService extends IService<Class> {
 }

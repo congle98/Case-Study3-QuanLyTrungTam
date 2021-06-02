@@ -1,4 +1,4 @@
-package com.app.service.ClassService;
+package com.app.service.classService;
 
 import com.app.models.Class;
 

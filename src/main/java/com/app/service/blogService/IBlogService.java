@@ -1,4 +1,4 @@
-package com.app.service.BlogService;
+package com.app.service.blogService;
 
 import com.app.models.Blog;
 import com.app.service.IService;

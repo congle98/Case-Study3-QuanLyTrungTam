@@ -1,4 +1,4 @@
-package com.app.service.AddressService;
+package com.app.service.addressService;
 
 import com.app.models.Address;
 
