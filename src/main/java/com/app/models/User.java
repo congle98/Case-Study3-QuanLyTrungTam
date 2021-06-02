@@ -94,4 +94,18 @@ public abstract class User {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", url='" + url + '\'' +
+                ", address=" + address +
+                ", dob=" + dob +
+                ", status=" + status +
+                '}';
+    }
 }

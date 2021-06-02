@@ -3,6 +3,7 @@ package com.app.controller;
 
 
 import com.app.models.Admin;
+import com.app.service.addressService.AddressService;
 import com.app.service.adminService.AdminService;
 
 import javax.servlet.RequestDispatcher;
@@ -17,6 +18,9 @@ import java.util.List;
 @WebServlet("/Admin")
 public class AdminServlet extends HttpServlet {
     AdminService adminService = new AdminService();
+
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -60,14 +64,14 @@ public class AdminServlet extends HttpServlet {
         List<Admin> adminList = adminService.findAll();
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        Admin admin = new Admin(email,password);
+
 
 
 
         boolean check = false;
         for (Admin a: adminList
         ) {
-            if(a.getEmail().equals(admin.getEmail() )&& a.getPassword().equals(admin.getPassword())){
+            if(a.getEmail().equals(email)&& a.getPassword().equals(password)){
                 try {
                     check = true;
                     resp.sendRedirect("/admin/adminHome.jsp");
@@ -77,11 +81,7 @@ public class AdminServlet extends HttpServlet {
             }
         }
         if(!check){
-            try {
-                resp.sendRedirect("/Admin");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            adminHomePage(req,resp);
         }
     }
 }
