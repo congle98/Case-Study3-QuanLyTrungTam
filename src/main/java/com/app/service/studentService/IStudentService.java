@@ -1,9 +1,7 @@
-package com.app.service.StudentService;
+package com.app.service.studentService;
 
 import com.app.models.Student;
 import com.app.service.IService;
-
-import java.util.List;
 
 public interface IStudentService extends IService<Student> {
 

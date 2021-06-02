@@ -1,4 +1,4 @@
-package com.app.service.StudentService;
+package com.app.service.studentService;
 
 import com.app.models.Student;
 

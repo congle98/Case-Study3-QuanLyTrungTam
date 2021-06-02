@@ -1,4 +1,4 @@
-package com.app.service.ModuleService;
+package com.app.service.moduleService;
 
 import com.app.models.Module;
 import com.app.service.IService;
