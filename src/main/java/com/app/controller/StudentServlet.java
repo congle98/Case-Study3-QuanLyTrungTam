@@ -34,6 +34,8 @@ public class StudentServlet extends HttpServlet {
 
     private void showAllStataus(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher("student/studentList.jsp");
+        Status status = new Status("ccccc");
+        statusService.edit(11, status);
         List<Status> listSTT = statusService.findAll();
         req.setAttribute("listSTT", listSTT);
         dispatcher.forward(req,resp);
