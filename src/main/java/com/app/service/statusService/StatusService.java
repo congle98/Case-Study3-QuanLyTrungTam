@@ -30,53 +30,78 @@ public class StatusService implements IStatusService {
     Connection connection = ConnectionJDBC.getConnection();
 
     @Override
-    public List<Status> findAll() throws SQLException {
+    public List<Status> findAll(){
         List <Status> listStatus = new ArrayList<>();
-        PreparedStatement statement = connection.prepareStatement(SELECT_ALL_STT);
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()){
-            int id = resultSet.getInt("id");
-            String name = resultSet.getString("name");
-            listStatus.add(new Status(id,name));
-            for (Status s: listStatus
-                 ) {
-                System.out.println(s);
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(SELECT_ALL_STT);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                listStatus.add(new Status(id,name));
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+
         return listStatus;
     }
 
     @Override
-    public Status findById(int id) throws SQLException {
+    public Status findById(int id){
         Status status = null;
-        PreparedStatement statement = connection.prepareStatement(SELECT_STT_BY_ID);
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()){
-            String name = resultSet.getString("name");
-            status = new Status(id,name);
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(SELECT_STT_BY_ID);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                String name = resultSet.getString("name");
+                status = new Status(id,name);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return status;
     }
 
     @Override
-    public void save(Status status) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(SAVE_STT);
-        statement.setString(1, status.getName());
-        statement.executeUpdate();
+    public void save(Status status){
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(SAVE_STT);
+            statement.setString(1, status.getName());
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
-    public void delete(int id) throws SQLException {
-        PreparedStatement statement =  connection.prepareStatement(DELETE_STT_BY_ID);
-        statement.setInt(1, id);
-        statement.executeUpdate();
+    public void delete(int id){
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(DELETE_STT_BY_ID);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
     @Override
-    public void edit(int id, Status status) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(UPDATE_STT);
-        statement.setString(1, status.getName());
-        statement.setInt(2,id);
-        statement.executeUpdate();
+    public void edit(int id, Status status) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(UPDATE_STT);
+            statement.setString(1, status.getName());
+            statement.setInt(2,id);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 }

@@ -1,8 +1,8 @@
 package com.app.controller;
 
-import com.app.models.Status;
-import com.app.service.IService;
-import com.app.service.statusService.StatusService;
+import com.app.models.Course;
+import com.app.service.courseService.CourseService;
+import com.app.service.courseService.ICourseService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+
 
 @WebServlet(name = "StudentServlet", value = "/student")
 public class StudentServlet extends HttpServlet {
-    IService statusService = new StatusService();
+   ICourseService courseService = new CourseService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -34,10 +34,8 @@ public class StudentServlet extends HttpServlet {
 
     private void showAllStataus(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher("student/studentList.jsp");
-        Status status = new Status("ccccc");
-        statusService.edit(11, status);
-        List<Status> listSTT = statusService.findAll();
-        req.setAttribute("listSTT", listSTT);
+        courseService.edit(5,new Course("check", 10));
+        req.setAttribute("listSTT", courseService.findAll());
         dispatcher.forward(req,resp);
     }
 
