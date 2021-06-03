@@ -1,8 +1,7 @@
 package com.app.service.addressService;
 
 import com.app.config.ConnectionJDBC;
-import com.app.models.Address;
-import com.sun.xml.internal.ws.wsdl.writer.document.http.Address;
+import com.app.model.Address;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

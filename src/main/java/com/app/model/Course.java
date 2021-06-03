@@ -1,4 +1,4 @@
-package com.app.models;
+package com.app.model;
 
 public class Course {
     private int id;

@@ -1,8 +1,6 @@
 package com.app.controller;
 
-import com.app.models.Supervisor;
-import com.app.service.adminService.AdminService;
-import com.app.service.adminService.IAdminService;
+import com.app.model.Supervisor;
 import com.app.service.supervisorService.ISupervisorService;
 import com.app.service.supervisorService.SupervisorService;
 
@@ -12,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/trang-chu")
@@ -40,7 +39,7 @@ public class UserServlet extends HttpServlet {
         if(action == null){
             action = "";
         }
-
+        try {
         switch (action){
 
             case "student":
@@ -53,10 +52,12 @@ public class UserServlet extends HttpServlet {
             default:
                 comeBackIndex(req,resp);
                 break;
-
+        }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
-    private void supervisorLogin(HttpServletRequest req, HttpServletResponse resp) {
+    private void supervisorLogin(HttpServletRequest req, HttpServletResponse resp) throws SQLException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         List<Supervisor> supervisorList = supervisorService.findAll();

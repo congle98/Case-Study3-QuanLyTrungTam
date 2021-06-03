@@ -1,6 +1,6 @@
 package com.app.service.moduleService;
 
-import com.app.models.Module;
+import com.app.model.Module;
 
 import java.util.List;
 

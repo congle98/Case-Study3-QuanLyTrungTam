@@ -1,4 +1,4 @@
-package com.app.models;
+package com.app.model;
 
 public class Admin {
     private int id;

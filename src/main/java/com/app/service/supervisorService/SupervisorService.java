@@ -1,9 +1,9 @@
 package com.app.service.supervisorService;
 
 import com.app.config.ConnectionJDBC;
-import com.app.models.Address;
-import com.app.models.Status;
-import com.app.models.Supervisor;
+import com.app.model.Address;
+import com.app.model.Status;
+import com.app.model.Supervisor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

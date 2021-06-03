@@ -1,6 +1,4 @@
-package com.app.models;
-
-import java.util.List;
+package com.app.model;
 
 public class Address {
     private int id;

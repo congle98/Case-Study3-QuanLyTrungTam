@@ -1,6 +1,7 @@
 package com.app.service.statusService;
 
-import com.app.models.Status;
+import com.app.model.Class;
+import com.app.model.Status;
 import com.app.config.ConnectionJDBC;
 
 import java.sql.Connection;

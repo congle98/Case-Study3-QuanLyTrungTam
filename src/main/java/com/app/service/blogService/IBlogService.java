@@ -1,6 +1,6 @@
 package com.app.service.blogService;
 
-import com.app.models.Blog;
+import com.app.model.Blog;
 import com.app.service.IService;
 
 public interface IBlogService extends IService<Blog> {

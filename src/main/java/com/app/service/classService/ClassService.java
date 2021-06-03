@@ -1,10 +1,8 @@
 package com.app.service.classService;
 
 import com.app.config.ConnectionJDBC;
-import com.app.models.Class;
-import com.app.models.Course;
-import com.app.models.Teacher;
-import com.app.service.IService;
+import com.app.model.Class;
+import com.app.model.Course;
 import com.app.service.courseService.CourseService;
 import com.app.service.courseService.ICourseService;
 import com.app.service.teacherService.ITeacherService;

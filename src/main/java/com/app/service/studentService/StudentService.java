@@ -1,7 +1,7 @@
 package com.app.service.studentService;
 
 import com.app.config.ConnectionJDBC;
-import com.app.models.Student;
+import com.app.model.Student;
 
 import java.sql.Connection;
 import java.util.List;

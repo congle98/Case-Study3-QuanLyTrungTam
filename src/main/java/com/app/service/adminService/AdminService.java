@@ -1,7 +1,7 @@
 package com.app.service.adminService;
 
 import com.app.config.ConnectionJDBC;
-import com.app.models.Admin;
+import com.app.model.Admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,5 +1,4 @@
 package com.app.service;
-import com.app.models.Status;
 
 import java.sql.SQLException;
 import java.util.List;
