@@ -4,7 +4,6 @@ import com.app.config.ConnectionJDBC;
 import com.app.models.Address;
 import com.app.models.Status;
 import com.app.models.Supervisor;
-import com.app.service.addressService.AddressService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
