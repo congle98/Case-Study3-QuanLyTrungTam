@@ -19,7 +19,7 @@
 </head>
 <body>
 <table border="1">
-<c:forEach items="${listBlog}" var="list">
+<c:forEach items="${teacherList}" var="list">
 
         <tr>
 <%--            <td>${list.id}</td>--%>
@@ -28,11 +28,15 @@
 <%--            <td>${list.dateStart}</td>--%>
 <%--            <td>${list.dateEnd}</td>--%>
 <%--            <td>${list.studentList}</td>--%>
+<%--            <td>${list.id}</td>--%>
+<%--            <td>${list.description}</td>--%>
+<%--            <td>${list.date}</td>--%>
+<%--            <td>${list.aClass.name}</td>--%>
+<%--            <td>${list.aClass.teacher.name}</td>--%>
             <td>${list.id}</td>
-            <td>${list.description}</td>
-            <td>${list.date}</td>
-            <td>${list.aClass.name}</td>
-            <td>${list.aClass.teacher.name}</td>
+            <td>${list.name}</td>
+            <td>${list.email}</td>
+            <td>${list.status.name}</td>
         </tr>
 
 </c:forEach>
