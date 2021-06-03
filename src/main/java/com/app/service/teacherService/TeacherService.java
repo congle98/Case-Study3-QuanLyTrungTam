@@ -119,6 +119,7 @@ public class TeacherService implements ITeacherService{
             statement.setInt(5,teacher.getAddress().getId());
             statement.setDate(6, Date.valueOf(teacher.getDob()));
             statement.setInt(7,teacher.getStatus().getId());
+            statement.setInt(8,id);
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
