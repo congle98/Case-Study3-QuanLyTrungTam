@@ -44,6 +44,7 @@ public class TeacherService implements ITeacherService{
                 Status status = statusService.findById(status_id);
                 Teacher teacher = new Teacher(id,name,email,password,url_img,address,dob,status);
                 teachers.add(teacher);
+
             }
 
         } catch (SQLException throwables) {
@@ -71,6 +72,7 @@ public class TeacherService implements ITeacherService{
                 int status_id = rs.getInt("status_id");
                 Status status = statusService.findById(status_id);
                 teacher = new Teacher(teacher_id,name,email,password,url_img,address,dob,status);
+                System.out.println(teacher);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

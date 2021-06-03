@@ -18,6 +18,25 @@
     <title>Hello, world!</title>
 </head>
 <body>
+<table border="1">
+<c:forEach items="${listBlog}" var="list">
+
+        <tr>
+<%--            <td>${list.id}</td>--%>
+<%--            <td>${list.name}</td>--%>
+<%--            <td>${list.aClass.name}</td>--%>
+<%--            <td>${list.dateStart}</td>--%>
+<%--            <td>${list.dateEnd}</td>--%>
+<%--            <td>${list.studentList}</td>--%>
+            <td>${list.id}</td>
+            <td>${list.description}</td>
+            <td>${list.date}</td>
+            <td>${list.aClass.name}</td>
+            <td>${list.aClass.teacher.name}</td>
+        </tr>
+
+</c:forEach>
+</table>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
