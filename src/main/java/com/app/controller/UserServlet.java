@@ -1,11 +1,13 @@
 package com.app.controller;
 
+import com.app.models.Admin;
 import com.app.models.Supervisor;
 import com.app.service.adminService.AdminService;
 import com.app.service.adminService.IAdminService;
 import com.app.service.supervisorService.ISupervisorService;
 import com.app.service.supervisorService.SupervisorService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,6 +60,7 @@ public class UserServlet extends HttpServlet {
         }
     }
     private void supervisorLogin(HttpServletRequest req, HttpServletResponse resp) {
+        RequestDispatcher rd =req.getRequestDispatcher("/supervisor/supervisorHome.jsp");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         List<Supervisor> supervisorList = null;
@@ -71,8 +74,11 @@ public class UserServlet extends HttpServlet {
                     check = true;
 
                     try {
-                        resp.sendRedirect("/supervisor/supervisorHome.jsp");
+                        req.setAttribute("supervisor",s);
+                        rd.forward(req,resp);
                     } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ServletException e) {
                         e.printStackTrace();
                     }
                 }

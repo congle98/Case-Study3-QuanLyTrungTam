@@ -12,8 +12,8 @@ import java.util.List;
 
 public class AddressService implements IAddressService{
     private Connection connection = ConnectionJDBC.getConnection();
-    private String FIND_ALL_ADDRESS = "select * from address;";
-    private String FIND_ADDRESS_BY_ID = "select * from address where id = ?;";
+    private String SELECT_ALL_ADDRESS = "select * from address;";
+    private String SELECT_ADDRESS_BY_ID = "select * from address where id = ?;";
     private String SAVE_ADDRESS = "insert into address(name) value(?);";
     private String DELETE_ADDRESS = "delete from address where id = ?;";
     private String UPDATE_ADDRESS = "update address set name = ? where id = ?;";
@@ -21,8 +21,8 @@ public class AddressService implements IAddressService{
     public List<Address> findAll() {
         List<Address> addressList = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_ADDRESS);
-            ResultSet resultSet = preparedStatement.executeQuery(FIND_ALL_ADDRESS);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ADDRESS);
+            ResultSet resultSet = preparedStatement.executeQuery(SELECT_ALL_ADDRESS);
             while (resultSet.next()){
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
@@ -38,9 +38,9 @@ public class AddressService implements IAddressService{
     public Address findById(int id) {
         Address address = null;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ADDRESS_BY_ID);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ADDRESS_BY_ID);
             preparedStatement.setInt(1,id);
-            ResultSet resultSet = preparedStatement.executeQuery(FIND_ADDRESS_BY_ID);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 int address_id = resultSet.getInt("id");
                 String name = resultSet.getString("name");

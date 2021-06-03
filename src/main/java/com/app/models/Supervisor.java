@@ -10,6 +10,10 @@ public class Supervisor extends User {
         super(id, name, email, password, url, address, dob, status);
     }
 
+    public Supervisor(String name, String email, String password, String url, Address address, LocalDate dob, Status status) {
+        super(name, email, password, url, address, dob, status);
+    }
+
     @Override
     public String toString() {
         return super.toString();

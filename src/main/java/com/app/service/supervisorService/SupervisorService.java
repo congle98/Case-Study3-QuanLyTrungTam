@@ -5,59 +5,43 @@ import com.app.models.Address;
 import com.app.models.Status;
 import com.app.models.Supervisor;
 import com.app.service.addressService.AddressService;
+import com.app.service.statusService.StatusService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SupervisorService implements  ISupervisorService{
     Connection connection = ConnectionJDBC.getConnection();
+    AddressService addressService = new AddressService();
+    StatusService statusService = new StatusService();
 
-    private String FIND_ALL_SUPERVISOR = "select\n" +
-            "    s.id as supervisor_id,\n" +
-            "       s.name as supervisor_name,\n" +
-            "       s.dob as supervisor_dob,\n" +
-            "       s.email as supervisor_email,\n" +
-            "       s.password as supervisor_password,\n" +
-            "       s.url_img as supervisor_img,\n" +
-            "       a.id as address_id,\n" +
-            "       a.name as address_name,\n" +
-            "       s2.id as status_id,\n" +
-            "       s2.name as status_name\n" +
-            "from supervisor as s join address a on a.id = s.address_id\n" +
-            "join status s2 on s2.id = s.status_id;";
+    private String SELECT_ALL_SUPERVISOR = "select * from supervisor;";
+    private String SELECT_SUPERVISOR_BY_ID = "select * from supervisor where id = ?;";
+    private String SAVE_SUPERVISOR = "insert into supervisor(name, email, password, address_id, url_img, dob, status_id) values(?,?,?,?,?,?,?);";
+    private String DELETE_SUPERVISOR = "delete from supervisor where id = ?;";
+    private String UPDATE_SUPERVISOR = "update supervisor set name = ?,email = ?, password = ?,address_id = ?, url_img = ?, dob = ?, status_id = ? where id =?;";
     @Override
     public List<Supervisor> findAll() {
         List<Supervisor> supervisorList = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement =connection.prepareStatement(FIND_ALL_SUPERVISOR);
+            PreparedStatement preparedStatement =connection.prepareStatement(SELECT_ALL_SUPERVISOR);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
+
                 int address_id = resultSet.getInt("address_id");
-                String address_name = resultSet.getString("address_name");
-                Address address = new Address(address_id,address_name);
                 int status_id = resultSet.getInt("status_id");
-                String status_name = resultSet.getString("status_name");
-                Status status = new Status(status_id,status_name);
-                int supervisor_id = resultSet.getInt("supervisor_id");
-                String supervisor_name = resultSet.getString("supervisor_name");
-                String supervisor_email = resultSet.getString("supervisor_email");
-                String supervisor_password = resultSet.getString("supervisor_password");
-                String supervisor_img = resultSet.getString("supervisor_img");
-                LocalDate supervisor_dob = resultSet.getDate("supervisor_dob").toLocalDate();
-                Supervisor supervisor = new Supervisor();
-                supervisor.setId(supervisor_id);
-                supervisor.setDob(supervisor_dob);
-                supervisor.setEmail(supervisor_email);
-                supervisor.setName(supervisor_name);
-                supervisor.setPassword(supervisor_password);
-                supervisor.setUrl(supervisor_img);
-                supervisor.setStatus(status);
-                supervisor.setAddress(address);
+                Address address = addressService.findById(address_id);
+                Status status = statusService.findById(status_id);
+                int Supervisor_id = resultSet.getInt("id");
+                String Supervisor_name = resultSet.getString("name");
+                String Supervisor_email = resultSet.getString("email");
+                String Supervisor_password = resultSet.getString("password");
+                String Supervisor_img = resultSet.getString("url_img");
+                LocalDate Supervisor_dob = resultSet.getDate("dob").toLocalDate();
+                Supervisor supervisor = new Supervisor(Supervisor_id,Supervisor_name,Supervisor_email,Supervisor_password,
+                        Supervisor_img,address,Supervisor_dob,status);
                 supervisorList.add(supervisor);
             }
         } catch (SQLException throwables) {
@@ -68,21 +52,76 @@ public class SupervisorService implements  ISupervisorService{
 
     @Override
     public Supervisor findById(int id) {
-        return null;
+        Supervisor supervisor = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_SUPERVISOR_BY_ID);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int address_id = resultSet.getInt("address_id");
+                int status_id = resultSet.getInt("status_id");
+                Address address = addressService.findById(address_id);
+                Status status = statusService.findById(status_id);
+                int Supervisor_id = resultSet.getInt("id");
+                String Supervisor_name = resultSet.getString("name");
+                String Supervisor_email = resultSet.getString("email");
+                String Supervisor_password = resultSet.getString("password");
+                String Supervisor_img = resultSet.getString("url_img");
+                LocalDate Supervisor_dob = resultSet.getDate("dob").toLocalDate();
+                supervisor = new Supervisor(Supervisor_id,Supervisor_name,Supervisor_email,Supervisor_password,
+                         Supervisor_img,address,Supervisor_dob,status);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return supervisor;
+
     }
 
     @Override
     public void save(Supervisor p) {
-
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SAVE_SUPERVISOR);
+            preparedStatement.setString(1,p.getName());
+            preparedStatement.setString(2,p.getEmail());
+            preparedStatement.setString(3,p.getPassword());
+            preparedStatement.setInt(4,p.getAddress().getId());
+            preparedStatement.setString(5,p.getUrl());
+            preparedStatement.setDate(6, Date.valueOf(p.getDob()));
+            preparedStatement.setInt(7,p.getStatus().getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
     public void delete(int id) {
-
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SUPERVISOR);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
     public void edit(int id, Supervisor supervisor) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SUPERVISOR);
+            preparedStatement.setString(1,supervisor.getName());
+            preparedStatement.setString(2,supervisor.getEmail());
+            preparedStatement.setString(3,supervisor.getPassword());
+            preparedStatement.setInt(4,supervisor.getAddress().getId());
+            preparedStatement.setString(5,supervisor.getUrl());
+            preparedStatement.setDate(6, Date.valueOf(supervisor.getDob()));
+            preparedStatement.setInt(7,supervisor.getStatus().getId());
+            preparedStatement.setInt(8,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 }

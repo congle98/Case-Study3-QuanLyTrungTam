@@ -31,6 +31,16 @@ public abstract class User {
         this.password = password;
     }
 
+    public User(String name, String email, String password, String url, Address address, LocalDate dob, Status status) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.url = url;
+        this.address = address;
+        this.dob = dob;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }
