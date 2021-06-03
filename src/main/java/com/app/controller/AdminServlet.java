@@ -3,8 +3,7 @@ package com.app.controller;
 
 
 import com.app.models.Admin;
-import com.app.service.addressService.AddressService;
-import com.app.service.adminService.AdminService;
+import com.app.service.AdminService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

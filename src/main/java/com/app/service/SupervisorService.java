@@ -1,10 +1,9 @@
-package com.app.service.supervisorService;
+package com.app.service;
 
 import com.app.config.ConnectionJDBC;
 import com.app.models.Address;
 import com.app.models.Status;
 import com.app.models.Supervisor;
-import com.app.service.addressService.AddressService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupervisorService implements  ISupervisorService{
+public class SupervisorService implements IService<Supervisor>{
     Connection connection = ConnectionJDBC.getConnection();
 
     private String FIND_ALL_SUPERVISOR = "select\n" +

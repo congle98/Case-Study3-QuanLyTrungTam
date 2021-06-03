@@ -1,14 +1,9 @@
-package com.app.service.classService;
+package com.app.service;
 
 import com.app.config.ConnectionJDBC;
 import com.app.models.Class;
 import com.app.models.Course;
 import com.app.models.Teacher;
-import com.app.service.IService;
-import com.app.service.courseService.CourseService;
-import com.app.service.courseService.ICourseService;
-import com.app.service.teacherService.ITeacherService;
-import com.app.service.teacherService.TeacherService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,15 +12,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassService implements IClassService{
+public class ClassService implements IService<Class> {
     private static final String SELECT_ALL_CLASS = "SELECT * FROM class;";
     private static final String SELECT_CLASS_BY_ID = "SELECT * FROM class WHERE class.id =?;";
     private static final String INSERT_CLASS = "INSERT INTO class (name, teacher_id , course_id) VALUE (?,?,?);";
     private static final String DELETE_CLASS_BY_ID = "DELETE FROM class WHERE class.id =?;";
     private static final String UPDATE_CLASS_BY_ID = "UPDATE class SET name =?, teacher_id =?, course_id =? WHERE class.id=?;";
-    ICourseService courService = new CourseService();
-    ITeacherService teacherService = new TeacherService();
+    IService<Course> courService = new CourseService();
+    IService<Teacher> teacherService = new TeacherService();
     Connection connection = ConnectionJDBC.getConnection();
+
+
     @Override
     public List<Class> findAll() {
         List<Class> listClass = new ArrayList<>();

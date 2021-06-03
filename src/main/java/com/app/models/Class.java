@@ -23,6 +23,10 @@ public class Class {
         this.course = course;
     }
 
+    public Class(String name) {
+        this.name = name;
+    }
+
     public Class() {
     }
 

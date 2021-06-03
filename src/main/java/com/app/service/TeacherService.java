@@ -1,10 +1,10 @@
-package com.app.service.teacherService;
+package com.app.service;
 
 import com.app.models.Teacher;
 
 import java.util.List;
 
-public class TeacherService implements ITeacherService{
+public class TeacherService implements IService<Teacher> {
     @Override
     public List<Teacher> findAll() {
         return null;

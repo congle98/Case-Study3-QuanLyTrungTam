@@ -26,7 +26,7 @@ public abstract class User {
         this.status = status;
     }
 
-    public User(String email, String password) {
+    public User(String name, String s, String email, String password, Address address, LocalDate dob, Status status) {
         this.email = email;
         this.password = password;
     }

@@ -1,10 +1,8 @@
 package com.app.controller;
 
 import com.app.models.Supervisor;
-import com.app.service.adminService.AdminService;
-import com.app.service.adminService.IAdminService;
-import com.app.service.supervisorService.ISupervisorService;
-import com.app.service.supervisorService.SupervisorService;
+import com.app.service.IService;
+import com.app.service.SupervisorService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +16,7 @@ import java.util.List;
 @WebServlet("/trang-chu")
 public class UserServlet extends HttpServlet {
 
-    ISupervisorService supervisorService = new SupervisorService();
+    IService<Supervisor> supervisorService = new SupervisorService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -61,11 +59,7 @@ public class UserServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         List<Supervisor> supervisorList = null;
-        try {
-            supervisorList = supervisorService.findAll();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        supervisorList = supervisorService.findAll();
         System.out.println(supervisorList);
         boolean check = false;
         for (Supervisor s: supervisorList

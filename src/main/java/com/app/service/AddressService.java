@@ -1,4 +1,4 @@
-package com.app.service.addressService;
+package com.app.service;
 
 import com.app.config.ConnectionJDBC;
 import com.app.models.Address;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressService implements IAddressService{
+public class AddressService implements IService<Address>{
     private Connection connection = ConnectionJDBC.getConnection();
     private String FIND_ALL_ADDRESS = "select * from address;";
     private String FIND_ADDRESS_BY_ID = "select * from address where id = ?;";
@@ -40,7 +40,7 @@ public class AddressService implements IAddressService{
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ADDRESS_BY_ID);
             preparedStatement.setInt(1,id);
-            ResultSet resultSet = preparedStatement.executeQuery(FIND_ADDRESS_BY_ID);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 int address_id = resultSet.getInt("id");
                 String name = resultSet.getString("name");

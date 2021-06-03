@@ -1,4 +1,4 @@
-package com.app.service.courseService;
+package com.app.service;
 
 import com.app.config.ConnectionJDBC;
 import com.app.models.Course;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseService implements ICourseService{
+public class CourseService implements IService<Course> {
     public static final String SELECT_ALL_COURSE =
             "SELECT * FROM course;";
 
