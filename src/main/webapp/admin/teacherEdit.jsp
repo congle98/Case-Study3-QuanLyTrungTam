@@ -16,7 +16,6 @@
     <style>
         .form-product-1{
             margin: 75px auto;
-            /*height: 570px;*/
         }
         .form-product{
             width: 90%;
@@ -38,34 +37,34 @@
         <form method="post" >
             <div class="form-group">
                 <label class="form-label" for="id">Id giáo vụ</label>
-                <input class="form-control" name="id" id="id" value="${supervisor.id}" disabled>
+                <input class="form-control" name="id" id="id" value="${teacher.id}" disabled>
             </div>
             <div class="form-group">
                 <label class="form-label" for="name">Tên giáo vụ</label>
-                <input class="form-control" name="name" id="name" value="${supervisor.name}"></br>
+                <input class="form-control" name="name" id="name" value="${teacher.name}"></br>
             </div>
             <div class="form-group">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-control" name="email" id="email" value="${supervisor.email}"></br>
+                <input class="form-control" name="email" id="email" value="${teacher.email}"></br>
             </div>
             <div class="form-group">
                 <label class="form-label" for="password">Mật Khẩu</label>
-                <input class="form-control" name="password" id="password" value="${supervisor.password}"></br>
+                <input class="form-control" name="password" id="password" value="${teacher.password}"></br>
             </div>
             <div class="form-group">
                 <label class="form-label" for="url">Ảnh</label>
-                <input class="form-control" name="url" id="url" value="${supervisor.url}"></br>
+                <input class="form-control" name="url" id="url" value="${teacher.url}"></br>
             </div>
             <div class="form-group">
                 <label class="form-label" for="dob">Ngày sinh</label>
-                <input class="form-control" name="dob" id="dob"  type="date" value="${supervisor.dob}"></br>
+                <input class="form-control" name="dob" id="dob"  type="date" value="${teacher.dob}"></br>
             </div>
             <div class="form-group">
                 <label class="form-label" for="status_id"></label>
                 <select class="form-select" name="status_id"  id="status_id" >
                     <c:forEach items="${statusList}" var="status" >
                         <option value="${status.id}"
-                                    <c:if test="${status.id == supervisor.status.id}">selected="true"</c:if>>${status.name}
+                                <c:if test="${status.id == teacher.status.id}">selected="true"</c:if>>${status.name}
                         </option>
                     </c:forEach>
                 </select></br>
@@ -75,13 +74,11 @@
                 <select class="form-select" name="address_id"  id="address_id"  >
                     <c:forEach items="${addressList}" var="address" >
                         <option value="${address.id}"
-                                <c:if test="${address.id == supervisor.address.id}">selected="true"</c:if>>${address.name}
+                                <c:if test="${address.id == teacher.address.id}">selected="true"</c:if>>${address.name}
                         </option>
                     </c:forEach>
                 </select></br>
-                <%--                <c:forEach items="${categoriesOfBook}" var="categoriesOfBook">--%>
-                <%--                    <c:if test="${category.id = categoriesOfBook.id}">selected="true"</c:if>--%>
-                <%--                </c:forEach>--%>
+
             </div>
             <button class="btn btn-danger" type="submit">Xác Nhận</button>
         </form>

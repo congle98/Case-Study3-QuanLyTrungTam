@@ -11,8 +11,9 @@
 <body>
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand btn btn-outline-info" href="/Admin?action=supervisorCreate">CREATE NEW SUPERVISOR</a>
-        <p style="color: red">${admin.id}</p>
+        <a class="navbar-brand btn btn-outline-info" href="/Admin?action=createSupervisor">CREATE NEW SUPERVISOR</a>
+        <a class="navbar-brand btn btn-outline-info" href="/Admin?action=createTeacher">CREATE NEW TEACHER</a>
+        <h3 style="color: red">Admin : ${admin.id}</h3>
     </div>
 </nav>
 
@@ -45,11 +46,51 @@
                 <td>${s.status.name}</td>
 
                 <td>
-                    <a class="btn btn-outline-warning" href="/Admin?action=edit&id=${s.id}">Sửa</a>
+                    <a class="btn btn-outline-warning" href="/Admin?action=editSupervisor&id=${s.id}">Sửa</a>
                 </td>
 
                 <td>
-                    <a class="btn btn-outline-danger" href="/Admin?action=delete&id=${s.id}">Xoá</a>
+                    <a class="btn btn-outline-danger" href="/Admin?action=deleteSupervisor&id=${s.id}">Xoá</a>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
+<div style="margin-top: 70px">
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id giáo viên</th>
+            <th scope="col">Tên giáo viên</th>
+            <th scope="col">Email giáo viên</th>
+            <th scope="col">Mật khẩu giáo viên</th>
+            <th scope="col">Địa chỉ</th>
+            <th scope="col">link ảnh</th>
+            <th scope="col">Ngày sinh</th>
+            <th scope="col">Trạng thái</th>
+            <th colspan="2" scope="col">Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${teacherList}" var="t">
+            <tr>
+                <td scope="row">${t.id}</td>
+                <td>${t.name}</td>
+                <td>${t.email}</td>
+                <td>${t.password}</td>
+                <td>${t.address.name}</td>
+                <td>${t.url}</td>
+                <td>${t.dob}</td>
+                <td>${t.status.name}</td>
+
+                <td>
+                    <a class="btn btn-outline-warning" href="/Admin?action=editTeacher&id=${t.id}">Sửa</a>
+                </td>
+
+                <td>
+                    <a class="btn btn-outline-danger" href="/Admin?action=deleteTeacher&id=${t.id}">Xoá</a>
                 </td>
             </tr>
         </c:forEach>

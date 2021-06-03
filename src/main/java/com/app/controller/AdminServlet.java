@@ -36,12 +36,14 @@ public class AdminServlet extends HttpServlet {
     private static ClassService classIService = new ClassService();
     private static AddressService addressService = new AddressService();
     private static StatusService statusService = new StatusService();
+    private static TeacherService teacherService = new TeacherService();
     private static Admin adminMain = null;
     private static List<Supervisor> supervisorListMain = supervisorService.findAll();
     private static List<Address> addressListMain  = addressService.findAll();
     private static List<Course> courseListMain = courseService.findAll();
     private static List<Status> statusListMain = statusService.findAll();
     private static List<Class> classListMain = classIService.findAll();
+    private static List<Teacher> teacherListMain = teacherService.findAll();
 
 
 
@@ -57,8 +59,23 @@ public class AdminServlet extends HttpServlet {
             case "home":
                 adminHomePage(req,resp);
                 break;
-            case "supervisorCreate":
+            case "createSupervisor":
                 showFormSupervisorCreate(req,resp);
+                break;
+            case "editSupervisor":
+                showFormSupervisorEdit(req,resp);
+                break;
+            case"deleteSupervisor":
+                deleteSupervisor(req,resp);
+                break;
+            case "createTeacher":
+                showFormTeacherCreate(req,resp);
+                break;
+            case "editTeacher":
+                showFormTeacherEdit(req,resp);
+                break;
+            case"deleteTeacher":
+                deleteTeacher(req,resp);
                 break;
             default:
                 adminLoginPage(req,resp);
@@ -66,19 +83,7 @@ public class AdminServlet extends HttpServlet {
         }
     }
 
-    private void showFormSupervisorCreate(HttpServletRequest req, HttpServletResponse resp) {
-        req.setAttribute("addressList",addressListMain);
-        req.setAttribute("statusList",statusListMain);
-        RequestDispatcher rd = req.getRequestDispatcher("/admin/supervisorCreate.jsp");
-        try {
-            rd.forward(req,resp);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -94,15 +99,23 @@ public class AdminServlet extends HttpServlet {
             case "login":
                 loginAdmin(req,resp);
                 break;
-            case "supervisorCreate":
+            case "createSupervisor":
                 createSupervisor(req,resp);
+                break;
+            case "editSupervisor":
+                updateSupervisor(req,resp);
+                break;
+            case "createTeacher":
+                createTeacher(req,resp);
+                break;
+            case "editTeacher":
+                updateTeacher(req,resp);
                 break;
             default:
                 adminLoginPage(req,resp);
                 break;
         }
     }
-
 
 
 
@@ -116,6 +129,7 @@ public class AdminServlet extends HttpServlet {
     private void adminHomePage(HttpServletRequest req, HttpServletResponse resp) {
        req.setAttribute("admin",adminMain);
        req.setAttribute("supervisorList",supervisorListMain);
+       req.setAttribute("teacherList",teacherListMain);
 
        RequestDispatcher rd = req.getRequestDispatcher("/admin/adminHome.jsp");
         try {
@@ -145,6 +159,37 @@ public class AdminServlet extends HttpServlet {
             adminLoginPage(req,resp);
         }
     }
+    private void showFormSupervisorEdit(HttpServletRequest req, HttpServletResponse resp) {
+        req.setAttribute("addressList",addressListMain);
+        req.setAttribute("statusList",statusListMain);
+        int id = Integer.parseInt(req.getParameter("id"));
+        Supervisor supervisor = supervisorService.findById(id);
+
+        req.setAttribute("supervisor",supervisor);
+        RequestDispatcher rd = req.getRequestDispatcher("/admin/supervisorEdit.jsp");
+        try {
+            rd.forward(req,resp);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showFormSupervisorCreate(HttpServletRequest req, HttpServletResponse resp) {
+        req.setAttribute("addressList",addressListMain);
+        req.setAttribute("statusList",statusListMain);
+        RequestDispatcher rd = req.getRequestDispatcher("/admin/supervisorCreate.jsp");
+        try {
+            rd.forward(req,resp);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void createSupervisor(HttpServletRequest req, HttpServletResponse resp) {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
@@ -157,4 +202,91 @@ public class AdminServlet extends HttpServlet {
         supervisorListMain = supervisorService.findAll();
         adminHomePage(req,resp);
     }
+    private void updateSupervisor(HttpServletRequest req, HttpServletResponse resp){
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String url = req.getParameter("url");
+        LocalDate dob = LocalDate.parse(req.getParameter("dob"));
+        Address address = addressService.findById(Integer.parseInt(req.getParameter("address_id")));
+        Status status = statusService.findById(Integer.parseInt(req.getParameter("status_id")));
+        Supervisor supervisor = new Supervisor(name,email,password,url,address,dob,status);
+        supervisorService.edit(id,supervisor);
+        supervisorListMain = supervisorService.findAll();
+        adminHomePage(req,resp);
+    }
+    private void deleteSupervisor(HttpServletRequest req, HttpServletResponse resp) {
+        int id = Integer.parseInt(req.getParameter("id"));
+        supervisorService.delete(id);
+        supervisorListMain = supervisorService.findAll();
+        adminHomePage(req,resp);
+    }
+
+
+    private void deleteTeacher(HttpServletRequest req, HttpServletResponse resp) {
+        int id = Integer.parseInt(req.getParameter("id"));
+        teacherService.delete(id);
+        teacherListMain = teacherService.findAll();
+        adminHomePage(req,resp);
+
+    }
+
+    private void showFormTeacherEdit(HttpServletRequest req, HttpServletResponse resp) {
+        req.setAttribute("addressList",addressListMain);
+        req.setAttribute("statusList",statusListMain);
+        int id = Integer.parseInt(req.getParameter("id"));
+        Teacher teacher = teacherService.findById(id);
+
+        req.setAttribute("teacher",teacher);
+        RequestDispatcher rd = req.getRequestDispatcher("/admin/teacherEdit.jsp");
+        try {
+            rd.forward(req,resp);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showFormTeacherCreate(HttpServletRequest req, HttpServletResponse resp) {
+        req.setAttribute("addressList",addressListMain);
+        req.setAttribute("statusList",statusListMain);
+        RequestDispatcher rd = req.getRequestDispatcher("/admin/teacherCreate.jsp");
+        try {
+            rd.forward(req,resp);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void createTeacher(HttpServletRequest req, HttpServletResponse resp) {
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String url = req.getParameter("url");
+        LocalDate dob = LocalDate.parse(req.getParameter("dob"));
+        Address address = addressService.findById(Integer.parseInt(req.getParameter("address_id")));
+        Status status = statusService.findById(Integer.parseInt(req.getParameter("status_id")));
+        teacherService.save(new Teacher(name,email,password,url,address,dob,status));
+        teacherListMain = teacherService.findAll();
+        adminHomePage(req,resp);
+    }
+    private void updateTeacher(HttpServletRequest req, HttpServletResponse resp){
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String url = req.getParameter("url");
+        LocalDate dob = LocalDate.parse(req.getParameter("dob"));
+        Address address = addressService.findById(Integer.parseInt(req.getParameter("address_id")));
+        Status status = statusService.findById(Integer.parseInt(req.getParameter("status_id")));
+        Teacher teacher = new Teacher(name,email,password,url,address,dob,status);
+        teacherService.edit(id,teacher);
+        teacherListMain = teacherService.findAll();
+        adminHomePage(req,resp);
+    }
+
+
 }

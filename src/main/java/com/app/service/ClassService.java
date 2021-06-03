@@ -30,11 +30,11 @@ public class ClassService implements IService<Class>{
             while (resultSet.next()){
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-//                int idTeacher = resultSet.getInt("teacher_id");
+                int idTeacher = resultSet.getInt("teacher_id");
                 int idCourse = resultSet.getInt("course_id");
-//                Teacher teacher = teacherService.findById(idTeacher);
+                Teacher teacher = teacherService.findById(idTeacher);
                 Course course = courService.findById(idCourse);
-                Class class1 = new Class(id,name,course); System.out.println("loi cmnr");
+                Class class1 = new Class(id,name,teacher,course); System.out.println("loi cmnr");
                 listClass.add(class1);
                 for (Class a: listClass
                 ) {
@@ -60,7 +60,7 @@ public class ClassService implements IService<Class>{
                 int idCourse = resultSet.getInt("course_id");
                 Teacher teacher = teacherService.findById(idTeacher);
                 Course course = courService.findById(idCourse);
-                classById = new Class(id,name,course);
+                classById = new Class(id,name,teacher,course);
 
             }        } catch (SQLException throwables) {
             throwables.printStackTrace();

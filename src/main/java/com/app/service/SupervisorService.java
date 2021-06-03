@@ -96,17 +96,7 @@ public class SupervisorService implements IService<Supervisor> {
             throwables.printStackTrace();
         }
     }
-//    public void save_account(Supervisor p){
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement(SAVE_SUPERVISOR_ACCOUNT);
-//            preparedStatement.setString(1,p.getName());
-//            preparedStatement.setString(2,p.getEmail());
-//            preparedStatement.setString(3,p.getPassword());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
+
 
     @Override
     public void delete(int id) {
@@ -123,7 +113,6 @@ public class SupervisorService implements IService<Supervisor> {
     public void edit(int id, Supervisor supervisor) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SUPERVISOR);
-            String UPDATE_SUPERVISOR = "update supervisor set name = ?,email = ?, password = ?,address_id = ?, url_img = ?, dob = ?, status_id = ? where id =?;";
             preparedStatement.setString(1,supervisor.getName());
             preparedStatement.setString(2,supervisor.getEmail());
             preparedStatement.setString(3,supervisor.getPassword());
