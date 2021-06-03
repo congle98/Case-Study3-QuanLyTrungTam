@@ -22,6 +22,7 @@ public class ClassService implements IClassService{
     private static final String SELECT_CLASS_BY_ID = "SELECT * FROM class WHERE class.id =?;";
     private static final String INSERT_CLASS = "INSERT INTO class (name, teacher_id , course_id) VALUE (?,?,?);";
     private static final String DELETE_CLASS_BY_ID = "DELETE FROM class WHERE class.id =?;";
+    private static final String UPDATE_CLASS_BY_ID = "UPDATE class SET name =?, teacher_id =?, course_id =? WHERE class.id=?;";
     ICourseService courService = new CourseService();
     ITeacherService teacherService = new TeacherService();
     Connection connection = ConnectionJDBC.getConnection();
@@ -99,7 +100,7 @@ public class ClassService implements IClassService{
     @Override
     public void edit(int id, Class aClass) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE class SET name =?, teacher_id =?, course_id =? WHERE class.id=?;");
+            PreparedStatement statement = connection.prepareStatement(UPDATE_CLASS_BY_ID);
             statement.setString(1, aClass.getName());
             statement.setInt(2, aClass.getTeacher().getId());
             statement.setInt(3, aClass.getCourse().getId());

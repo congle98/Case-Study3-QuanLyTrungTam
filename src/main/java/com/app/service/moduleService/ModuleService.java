@@ -1,10 +1,13 @@
 package com.app.service.moduleService;
 
+import com.app.config.ConnectionJDBC;
 import com.app.models.Module;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class ModuleService implements IModuleService{
+    Connection connection = ConnectionJDBC.getConnection();
 
     @Override
     public List<Module> findAll() {
