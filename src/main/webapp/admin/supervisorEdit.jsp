@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: CONG
-  Date: 6/2/2021
-  Time: 10:25 AM
+  Date: 6/3/2021
+  Time: 12:55 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -72,9 +72,6 @@
                         </option>
                     </c:forEach>
                 </select></br>
-                <%--                <c:forEach items="${categoriesOfBook}" var="categoriesOfBook">--%>
-                <%--                    <c:if test="${category.id = categoriesOfBook.id}">selected="true"</c:if>--%>
-                <%--                </c:forEach>--%>
             </div>
             <div class="form-group">
                 <label class="form-label" for="address_id"></label>
@@ -100,4 +97,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </html>
-

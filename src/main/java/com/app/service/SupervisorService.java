@@ -1,18 +1,19 @@
-package com.app.service.supervisorService;
+package com.app.service;
 
 import com.app.config.ConnectionJDBC;
 import com.app.models.Address;
 import com.app.models.Status;
 import com.app.models.Supervisor;
-import com.app.service.addressService.AddressService;
-import com.app.service.statusService.StatusService;
+import com.app.service.IService;
+import com.app.service.AddressService;
+import com.app.service.StatusService;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupervisorService implements  ISupervisorService{
+public class SupervisorService implements IService<Supervisor> {
     Connection connection = ConnectionJDBC.getConnection();
     AddressService addressService = new AddressService();
     StatusService statusService = new StatusService();
@@ -22,6 +23,7 @@ public class SupervisorService implements  ISupervisorService{
     private String SAVE_SUPERVISOR = "insert into supervisor(name, email, password, address_id, url_img, dob, status_id) values(?,?,?,?,?,?,?);";
     private String DELETE_SUPERVISOR = "delete from supervisor where id = ?;";
     private String UPDATE_SUPERVISOR = "update supervisor set name = ?,email = ?, password = ?,address_id = ?, url_img = ?, dob = ?, status_id = ? where id =?;";
+    private String SAVE_SUPERVISOR_ACCOUNT = "insert into supervisor(name,email,password) values(?,?,?);";
     @Override
     public List<Supervisor> findAll() {
         List<Supervisor> supervisorList = new ArrayList<>();
@@ -94,6 +96,17 @@ public class SupervisorService implements  ISupervisorService{
             throwables.printStackTrace();
         }
     }
+//    public void save_account(Supervisor p){
+//        try {
+//            PreparedStatement preparedStatement = connection.prepareStatement(SAVE_SUPERVISOR_ACCOUNT);
+//            preparedStatement.setString(1,p.getName());
+//            preparedStatement.setString(2,p.getEmail());
+//            preparedStatement.setString(3,p.getPassword());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
 
     @Override
     public void delete(int id) {
@@ -110,6 +123,7 @@ public class SupervisorService implements  ISupervisorService{
     public void edit(int id, Supervisor supervisor) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SUPERVISOR);
+            String UPDATE_SUPERVISOR = "update supervisor set name = ?,email = ?, password = ?,address_id = ?, url_img = ?, dob = ?, status_id = ? where id =?;";
             preparedStatement.setString(1,supervisor.getName());
             preparedStatement.setString(2,supervisor.getEmail());
             preparedStatement.setString(3,supervisor.getPassword());

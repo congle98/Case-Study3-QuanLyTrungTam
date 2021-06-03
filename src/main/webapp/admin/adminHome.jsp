@@ -11,7 +11,7 @@
 <body>
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand btn btn-outline-info" href="/Admin?action=create">CREATE NEW USER</a>
+        <a class="navbar-brand btn btn-outline-info" href="/Admin?action=supervisorCreate">CREATE NEW SUPERVISOR</a>
         <p style="color: red">${admin.id}</p>
     </div>
 </nav>
@@ -44,13 +44,13 @@
                 <td>${s.dob}</td>
                 <td>${s.status.name}</td>
 
-<%--                <td>--%>
-<%--                    <a class="btn btn-outline-warning" href="/Books?action=edit&id=${b.id}">Sửa</a>--%>
-<%--                </td>--%>
+                <td>
+                    <a class="btn btn-outline-warning" href="/Admin?action=edit&id=${s.id}">Sửa</a>
+                </td>
 
-<%--                <td>--%>
-<%--                    <a class="btn btn-outline-danger" href="/Books?action=delete&id=${b.id}">Xoá</a>--%>
-<%--                </td>--%>
+                <td>
+                    <a class="btn btn-outline-danger" href="/Admin?action=delete&id=${s.id}">Xoá</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

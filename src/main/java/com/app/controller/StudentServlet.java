@@ -1,10 +1,7 @@
 package com.app.controller;
 
-import com.app.models.Course;
-import com.app.service.classService.ClassService;
-import com.app.service.classService.IClassService;
-import com.app.service.courseService.CourseService;
-import com.app.service.courseService.ICourseService;
+import com.app.service.IService;
+import com.app.service.ClassService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,12 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 
 @WebServlet(name = "StudentServlet", value = "/student")
 public class StudentServlet extends HttpServlet {
-   IClassService classService = new ClassService();
+   IService classService = new ClassService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");

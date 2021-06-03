@@ -1,10 +1,12 @@
-package com.app.service.blogService;
+package com.app.service;
 
+import com.app.models.Address;
 import com.app.models.Blog;
+import com.app.service.IService;
 
 import java.util.List;
 
-public class BlogService implements IBlogService{
+public class BlogService implements IService<Blog> {
     @Override
     public List<Blog> findAll() {
         return null;

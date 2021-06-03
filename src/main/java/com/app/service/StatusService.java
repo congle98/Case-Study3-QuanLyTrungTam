@@ -1,7 +1,9 @@
-package com.app.service.statusService;
+package com.app.service;
 
 import com.app.config.ConnectionJDBC;
+import com.app.models.Address;
 import com.app.models.Status;
+import com.app.service.IService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatusService implements IStatusService{
+public class StatusService implements IService<Status> {
     public static final String SELECT_ALL_STT =
             "SELECT * FROM status;";
 

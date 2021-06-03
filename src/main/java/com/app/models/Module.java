@@ -6,40 +6,40 @@ import java.util.List;
 public class Module {
     private int id;
     private String name;
-    private Class aClass;
+    private Class Class;
     private LocalDate dateStart;
     private LocalDate dateEnd;
     List<Student> studentList;
 
 
-    public Module(int id, String name, Class aClass, LocalDate dateStart, LocalDate dateEnd, List<Student> studentList) {
+    public Module(int id, String name, Class Class, LocalDate dateStart, LocalDate dateEnd, List<Student> studentList) {
         this.id = id;
         this.name = name;
-        this.aClass = aClass;
+        this.Class = Class;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.studentList = studentList;
     }
 
-    public Module(String name, Class aClass, LocalDate dateStart, LocalDate dateEnd, List<Student> studentList) {
+    public Module(String name, Class Class, LocalDate dateStart, LocalDate dateEnd, List<Student> studentList) {
         this.name = name;
-        this.aClass = aClass;
+        this.Class = Class;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.studentList = studentList;
     }
 
-    public Module(int id, String name, Class aClass, LocalDate dateStart, List<Student> studentList) {
+    public Module(int id, String name, Class Class, LocalDate dateStart, List<Student> studentList) {
         this.id = id;
         this.name = name;
-        this.aClass = aClass;
+        this.Class = Class;
         this.dateStart = dateStart;
         this.studentList = studentList;
     }
 
-    public Module(String name, Class aClass, LocalDate dateStart, List<Student> studentList) {
+    public Module(String name, Class Class, LocalDate dateStart, List<Student> studentList) {
         this.name = name;
-        this.aClass = aClass;
+        this.Class = Class;
         this.dateStart = dateStart;
         this.studentList = studentList;
     }
@@ -61,11 +61,11 @@ public class Module {
     }
 
     public Class getaClass() {
-        return aClass;
+        return Class;
     }
 
-    public void setaClass(Class aClass) {
-        this.aClass = aClass;
+    public void setaClass(Class Class) {
+        this.Class = Class;
     }
 
     public LocalDate getDateStart() {

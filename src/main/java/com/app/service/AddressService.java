@@ -1,7 +1,8 @@
-package com.app.service.addressService;
+package com.app.service;
 
 import com.app.config.ConnectionJDBC;
 import com.app.models.Address;
+import com.app.service.IService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressService implements IAddressService{
+public class AddressService implements IService<Address> {
     private Connection connection = ConnectionJDBC.getConnection();
     private String SELECT_ALL_ADDRESS = "select * from address;";
     private String SELECT_ADDRESS_BY_ID = "select * from address where id = ?;";
@@ -28,7 +29,7 @@ public class AddressService implements IAddressService{
                 String name = resultSet.getString("name");
                 addressList.add(new Address(id,name));
             }
-        } catch (SQLException throwables) {
+        } catch (Exception throwables) {
             throwables.printStackTrace();
         }
         return addressList;

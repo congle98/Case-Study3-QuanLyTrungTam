@@ -1,7 +1,9 @@
-package com.app.service.adminService;
+package com.app.service;
 
 import com.app.config.ConnectionJDBC;
+import com.app.models.Address;
 import com.app.models.Admin;
+import com.app.service.IService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminService implements IAdminService{
+public class AdminService implements IService<Admin> {
     private Connection connection = ConnectionJDBC.getConnection();
     private String FIND_ALL_ADMIN = "select * from admin";
 

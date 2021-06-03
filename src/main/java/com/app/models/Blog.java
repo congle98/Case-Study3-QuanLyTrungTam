@@ -6,22 +6,22 @@ public class Blog {
     private int id;
     private String description;
     private LocalDate date;
-    private Class aClass;
+    private Class Class;
 
-    public Blog(int id, String description, LocalDate date, Class aClass) {
+    public Blog(int id, String description, LocalDate date, Class Class) {
         this.id = id;
         this.description = description;
         this.date = date;
-        this.aClass = aClass;
+        this.Class = Class;
     }
 
     public Blog() {
     }
 
-    public Blog(String description, LocalDate date, Class aClass) {
+    public Blog(String description, LocalDate date, Class Class) {
         this.description = description;
         this.date = date;
-        this.aClass = aClass;
+        this.Class = Class;
     }
 
     public int getId() {
@@ -49,10 +49,10 @@ public class Blog {
     }
 
     public Class getaClass() {
-        return aClass;
+        return Class;
     }
 
-    public void setaClass(Class aClass) {
-        this.aClass = aClass;
+    public void setaClass(Class Class) {
+        this.Class = Class;
     }
 }

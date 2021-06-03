@@ -1,12 +1,15 @@
-package com.app.service.studentService;
+package com.app.service;
 
 import com.app.config.ConnectionJDBC;
+import com.app.models.Address;
+import com.app.models.Status;
 import com.app.models.Student;
+import com.app.service.IService;
 
 import java.sql.Connection;
 import java.util.List;
 
-public class StudentService implements IStudentService{
+public class StudentService implements IService<Student> {
     Connection connection = ConnectionJDBC.getConnection();
 
     @Override

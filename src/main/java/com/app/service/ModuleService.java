@@ -1,10 +1,12 @@
-package com.app.service.moduleService;
+package com.app.service;
 
+import com.app.models.Address;
 import com.app.models.Module;
+import com.app.service.IService;
 
 import java.util.List;
 
-public class ModuleService implements IModuleService{
+public class ModuleService implements IService<Module> {
 
     @Override
     public List<Module> findAll() {
